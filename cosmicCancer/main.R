@@ -89,17 +89,16 @@ adj.hc <- adj.hc[mutated,]
 gene_mut <- as.data.frame(rowSums(adj.hc))
 gene_mut$names <- rownames(adj.hc)
 gene_mut <- gene_mut[order(gene_mut$`rowSums(adj.hc)`,decreasing = T),]
-View(head(gene_mut)) ## ==> TP53
+head(gene_mut) ## ==> TP53
 
 centrality <- cbind(as.data.frame(centr_betw(g2)$res),as.matrix(V(g2)))
 colnames(centrality) <- c("centrality","i")
 centrality <- centrality[order(centrality$centrality,decreasing = T),]
-rownames(centrality)[1:10]
 head(centrality)
 #------------------------------------------------------------------------------#
 #----------------------------------- PART 2 -----------------------------------#
 #------------------------------------------------------------------------------#
-## (2)
+
 library(pcalg)
 
 cCancer <- cosmicCancer[complete.cases(cosmicCancer), ]
@@ -168,8 +167,8 @@ legend(x = -1.8, y = 1.1, c("Mutated genes", "Over/Under expressed genes","Ploid
        pt.cex = 1.8, cex = .8, bty = "n")
 
 
-############################################ significance level :: 0.05
-###################################################################################
+############################## significance level :: 0.05
+######################################################################
 pc.D_0.5 <- pcalg::pc( suffStat, 
                    indepTest = disCItest, ## indep.test: disc
                    alpha=0.035, labels = V, verbose = TRUE)
@@ -251,7 +250,7 @@ View(head(gene_mut)) ## ==> TP53
 centrality <- cbind(as.data.frame(centr_betw(g2)$res),as.matrix(V(g2)))
 colnames(centrality) <- c("centrality","i")
 centrality <- centrality[order(centrality$centrality,decreasing = T),]
-rownames(centrality)[1:10]
+head(centrality)
 
 #------------------------------------------------------------------------------€
 #----------------------------------- PART 3 -----------------------------------€
@@ -323,7 +322,7 @@ show_graph <- function(graph){
 
 par(mfrow=c(2,2))
 show_graph(graph); mtext("confidenceShuffle: T, confidenceThreshold: 0.001", side=1)
-legend(x = -2.1, y = 1.1, c("Mutated genes", "Over/Under expressed genes","Ploidy"), 
+legend(x = -1.8, y = 1.1, c("Mutated genes", "Over/Under expressed genes","Ploidy"), 
        pch = 21, col = "dodgerblue4", pt.bg = c("dodgerblue1","darkorange","forestgreen"),
        pt.cex = 1.5, cex = .6, bty = "n")
 show_graph(graph2); mtext("confidenceShuffle: F, confidenceThreshold: 0.001", side=1)
@@ -333,6 +332,7 @@ show_graph(graph4); mtext("confidenceShuffle: T, confidenceThreshold: 0.0001", s
 ## Export the graph to cyto format ("cyto.graphml")
 miic.write.network.cytoscape(g = miic.res,file = "/Users/amine/Desktop/Graphs/cyto")
 
+## For the rest we will use the first graph: ConfidenceShuffle:T, ConfidenceThreshold: 0.001
 adj.miic <- as.data.frame(adj.miic[1,1])
 for (i in seq(1,dim(adj.miic)[1])) {
   if(adj.miic[i,dim(adj.miic)[2]] != 0)
@@ -357,13 +357,12 @@ adj.miic <- adj.miic[mutated,]
 gene_mut <- as.data.frame(rowSums(adj.miic))
 gene_mut$names <- rownames(adj.miic)
 gene_mut <- gene_mut[order(gene_mut[,1],decreasing = T),]
-View(head(gene_mut)) ## ==> TP53
+head(gene_mut) ## ==> TP53
 
 centrality <- cbind(as.data.frame(centr_betw(g2)$res),as.matrix(V(g2)))
 colnames(centrality) <- c("centrality","i")
 centrality <- centrality[order(centrality$centrality,decreasing = T),]
-rownames(centrality)[1:10]
-
+head(centrality)
 
 
 
