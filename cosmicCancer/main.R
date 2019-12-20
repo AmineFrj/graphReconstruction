@@ -327,6 +327,7 @@ legend(x = -1.8, y = 1.1, c("Mutated genes", "Over/Under expressed genes","Ploid
        pt.cex = 1.5, cex = .6, bty = "n")
 show_graph(graph2); mtext("confidenceShuffle: F, confidenceThreshold: 0.001", side=1)
 show_graph(graph3); mtext("confidenceShuffle: T, confidenceThreshold: 0.01", side=1)
+
 show_graph(graph4); mtext("confidenceShuffle: T, confidenceThreshold: 0.0001", side=1)
 
 ## Export the graph to cyto format ("cyto.graphml")
